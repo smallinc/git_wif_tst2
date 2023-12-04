@@ -1,0 +1,42 @@
+name: Prepare Manifests and Deploy to GKE
+
+on:
+  # push:
+  #   branches: [ "main" ]
+  repository_dispatch:
+    types: [deploy]
+
+env:
+  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+  GKE_CLUSTER: kustomize-demo-cluster 
+  GKE_ZONE: us-central1-c
+  ENVIRONMENT: dev
+
+jobs:
+  setup-prepare-manifests-deploy:
+    name: Setup, Prepare, and Deploy
+    runs-on: ubuntu-latest
+    environment: production
+
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    # Configure Workload Identity Federation and generate an access token.
+    - id: 'auth'
+      name: 'Authenticate to Google Cloud'
+      uses: 'google-github-actions/auth@v1'
+      with:
+        token_format: 'access_token'
+        workload_identity_provider:  ${{ secrets.WORKLOAD_IDENTITY_PROVIDER_ID }}
+        service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+
+    - id: 'gcloud'
+      name: 'gcloud'
+      run: |-
+          gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
+          gcloud services list
