@@ -13,10 +13,18 @@
         steps:
           - name: Check if actor is in Kk group
             run: |
-              if [ "$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/orgs/smallinc/teams/Kk/members" | jq '.[].login' | grep -w "${{ github.actor }}" )" ]; then
-                echo "User is in Kk group. Run your workload here."
-              else
-                echo "User is not in Kk group. Skipping workload."
+            TEAM_NAME="kk"
+            USERNAME="${{ github.actor }}"
+            TOKEN="${{ secrets.GITHUB_TOKEN }}"
+  
+            # Get the team ID by name
+            TEAM_ID=$(curl -s -H "Authorization: Bearer $TOKEN" "https://api.github.com/orgs/smallinc/teams/$TEAM_NAME" | jq -r '.id')
+  
+            # Check if the actor is a member of the team
+            if [ "$(curl -s -H "Authorization: Bearer $TOKEN" "https://api.github.com/teams/$TEAM_ID/memberships/$USERNAME" | jq -r '.state')" == "active" ]; then
+                echo "User is in Kelo team. Run your workload here."
+            else
+                echo "User is not in Kelo team. Skipping workload."
                 exit 0
-              fi
+            fi
             shell: bash
