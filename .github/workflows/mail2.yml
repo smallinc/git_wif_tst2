@@ -15,7 +15,7 @@
             run: |
                 TEAM_NAME="kk"
                 USERNAME="${{ github.actor }}"
-                TOKEN="${{ secrets.GITHUB_TOKEN }}"
+                TOKEN="${{ secrets.TOKEN }}"
     
                 # Get the team ID by name
                 TEAM_ID=$(curl -s -H "Authorization: Bearer $TOKEN" "https://api.github.com/orgs/smallinc/teams/$TEAM_NAME" | jq -r '.id')
