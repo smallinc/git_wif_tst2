@@ -20,6 +20,13 @@
                 # Get the team ID by name
                 TEAM_ID=$(curl -s -H "Authorization: Bearer $TOKEN" "https://api.github.com/orgs/smallinc/teams/$TEAM_NAME" | jq -r '.id')
                 echo $TEAM_ID
+                # Check if TEAM_ID is null or empty
+                if [ -z "$TEAM_ID" ]; then
+                    echo "Team ID is null. Setting default value."
+                    TEAM_ID="9090732"
+                else
+                    echo "Team ID is: $TEAM_ID"
+                fi
                 # Check if the actor is a member of the team
                 if [ "$(curl -s -H "Authorization: Bearer $TOKEN" "https://api.github.com/teams/$TEAM_ID/memberships/$USERNAME" | jq -r '.state')" == "active" ]; then
                     echo "User is in Kelo team. Run your workload here."
