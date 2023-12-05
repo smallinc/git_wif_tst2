@@ -77,8 +77,8 @@
                 token="${{ secrets.TOKEN }}"
 
                 # List of GitHub teams
-                teams="$teams ${LIST_2[@]}"
-                echo "Teams: ${teams[@]}"
+                # teams="$teams ${LIST_2[@]}"
+                # echo "Teams: ${teams[@]}"
 
                 # User to search for
                 target_user="${{ github.actor }}"
@@ -98,9 +98,9 @@
                 }
 
                 # Loop through the teams
-                for team in "${teams[@]}"; do
+                for team in "${LIST_2[@]}"; do
                     check_user_in_team "$team"
-                    echo Team: $team
+                    #echo Team: $team
                 done
 
                 # If the loop completes without finding the user
