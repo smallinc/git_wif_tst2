@@ -99,6 +99,7 @@
                 # Loop through the teams
                 for team in "${teams[@]}"; do
                     check_user_in_team "$team"
+                    echo Team: $team
                 done
 
                 # If the loop completes without finding the user
