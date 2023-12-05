@@ -42,6 +42,13 @@
                 # Print the values in the array
                 echo "Values after /dev 1: ${values[@]}"
                 echo "Values after /dev 2: $values"
+                bb=($values)
+
+                # Print the elements in the list
+                echo "Elements in list bb:"
+                for element in "${bb[@]}"; do
+                    echo "$element"
+                done
                 #---------------
                 values_between_at_and_slash=()
                 values_after_slash=()
@@ -55,7 +62,7 @@
                     # Extract the value after "/"
                     after_slash=$(echo "$value" | awk -F'@|/' '{print $3}')
                     values_after_slash+=("$after_slash")
-                done <<< "${values[@]}"
+                done <<< "${bb[@]}"
                 
                 # Print the values in the arrays
                 echo "Values between @ and /: ${values_between_at_and_slash[@]}"
