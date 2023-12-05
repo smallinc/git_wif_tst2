@@ -41,7 +41,7 @@
                 done <<< "$content"
                 # Print the values in the array
                 echo "Values after /dev 1: ${values[@]}"
-
+                echo "Values after /dev 2: $values"
                 #---------------
                 values_between_at_and_slash=()
                 values_after_slash=()
