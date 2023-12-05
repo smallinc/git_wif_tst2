@@ -21,7 +21,7 @@
                 echo current working directory: $PWD
                 file_path="./.github/CODEOWNERS"
                 # echo ls -la output start
-                # cd test
+                cd test
                 # ls -la
                 # echo ls -la end
                 
