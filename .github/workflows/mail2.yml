@@ -19,7 +19,7 @@
           - name: Check if actor is in Kk group
             run: |
                 echo current working directory: $PWD
-                file_path=".s/.github/CODEOWNERS"
+                file_path="./.github/CODEOWNERS"
                 echo ls -la output start
                 cd test
                 ls -la
