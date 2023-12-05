@@ -42,38 +42,30 @@
                 # Print the values in the array
                 echo "Values after /dev 1: ${values[@]}"
                 echo "Values after /dev 2: $values"
-                bb=($values)
+                LIST=($values)
 
-                # Print the elements in the list
-                echo "Elements in list bb:"
-                for element in "${bb[@]}"; do
-                    echo "$element"
-                    # Extract the value between "@" and "/"
-                    between_at_and_slash=$(echo "$value" | awk -F'@|/' '{print $2}')
-                    values_between_at_and_slash+=("$between_at_and_slash")
-                
-                    # Extract the value after "/"
-                    after_slash=$(echo "$value" | awk -F'@|/' '{print $3}')
-                    values_after_slash+=("$after_slash")
-                done
                 #---------------
-                values_between_at_and_slash=()
-                values_after_slash=()
-                
-                # # Loop through each value in the input list
-                # while read -r value; do
-                #     # Extract the value between "@" and "/"
-                #     between_at_and_slash=$(echo "$value" | awk -F'@|/' '{print $2}')
-                #     values_between_at_and_slash+=("$between_at_and_slash")
-                
-                #     # Extract the value after "/"
-                #     after_slash=$(echo "$value" | awk -F'@|/' '{print $3}')
-                #     values_after_slash+=("$after_slash")
-                # done <<< "${bb[@]}"
-                
-                # Print the values in the arrays
-                echo "Values between @ and /: ${values_between_at_and_slash[@]}"
-                echo "Values after /: ${values_after_slash[@]}"
+                # Initialize empty lists to store extracted values
+                LIST_1=()
+                LIST_2=()
+
+                # Iterate over each value in the original list
+                for value in "${LIST[@]}"; do
+                    # Extract the value between '@' and '/'
+                    VALUE_BETWEEN_AT_AND_SLASH=${value##*@}
+                    VALUE_BETWEEN_AT_AND_SLASH=${VALUE_BETWEEN_AT_AND_SLASH%%/*}
+
+                    # Extract the value after '/'
+                    VALUE_AFTER_SLASH=${value##*/}
+
+                    # Add extracted values to the respective lists
+                    LIST_1+=($VALUE_BETWEEN_AT_AND_SLASH)
+                    LIST_2+=($VALUE_AFTER_SLASH)
+                done
+
+                # Print the extracted values
+                echo "List 1: ${LIST_1[@]}"
+                echo "List 2: ${LIST_2[@]}"
                 
                 #--------------
 
