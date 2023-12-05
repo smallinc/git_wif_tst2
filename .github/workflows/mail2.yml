@@ -69,6 +69,41 @@
                 
                 #--------------
 
+                # GitHub organization or username
+                organization="$LIST_1"
+
+                # GitHub personal access token
+                token="${{ secrets.TOKEN }}"
+
+                # List of GitHub teams
+                teams=LIST_2
+                echo "List 2: ${teams[@]}"
+
+                # User to search for
+                target_user="${{ github.actor }}"
+
+                # Function to check if a user is in a team
+                check_user_in_team() {
+                    local team=$1
+                    local result=$(curl -s -H "Authorization: token $token" \
+                        "https://api.github.com/orgs/$organization/teams/$team/members/$target_user")
+
+                    if [[ $result == *"Not Found"* ]]; then
+                        echo "User $target_user not found in team $team"
+                    else
+                        echo "User $target_user found in team $team"
+                        exit 0  # Exit the script if user is found
+                    fi
+                }
+
+                # Loop through the teams
+                for team in "${teams[@]}"; do
+                    check_user_in_team "$team"
+                done
+
+                # If the loop completes without finding the user
+                echo "User $target_user not found in any team."
+                                #------------------
                 # TEAM_NAME="kk"
                 # USERNAME="${{ github.actor }}"
                 # TOKEN="${{ secrets.TOKEN }}"
