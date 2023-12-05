@@ -27,7 +27,7 @@
                 
                 # Fetch the raw content from GitHub
                 content=$(cat ${file_path})
-                echo $content
+                #echo $content
                 
                 # Process the content line by line
                 while IFS= read -r line; do
@@ -39,6 +39,8 @@
                 fi
                 #done < "$file_path"
                 done <<< "$content"
+                # Print the values in the array
+                echo "Values after /dev 1: ${values[@]}"
 
                 # TEAM_NAME="kk"
                 # USERNAME="${{ github.actor }}"
