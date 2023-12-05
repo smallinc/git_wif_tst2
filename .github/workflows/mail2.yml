@@ -13,6 +13,23 @@
         steps:
           - name: Check if actor is in Kk group
             run: |
+                # Replace the following variables with your GitHub repository URL and file path
+                #repo_url="https://raw.githubusercontent.com/your_username/your_repository/main"
+                file_path=".github/CODEOWNERS"
+                
+                # Fetch the raw content from GitHub
+                content=$(curl -s "${file_path}")
+                
+                # Process the content line by line
+                while IFS= read -r line; do
+                    if [[ $line == /dev* && $line == *@* ]]; then
+                        # Extract team names starting with @
+                        team_names=$(echo "$line" | grep -o '@[a-zA-Z0-9_]*')
+                        
+                        # Print team names
+                        echo "Team names on the line starting with /dev: $team_names"
+                    fi
+                done <<< "$content"
                 TEAM_NAME="kk"
                 USERNAME="${{ github.actor }}"
                 TOKEN="${{ secrets.TOKEN }}"
@@ -33,5 +50,6 @@
                 else
                     echo "User is not in Kelo team. Skipping workload."
                     exit 0
-                fi
+                fi  
+
             shell: bash
