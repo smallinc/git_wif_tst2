@@ -71,13 +71,14 @@
 
                 # GitHub organization or username
                 organization="$LIST_1"
+                echo org: $organization
 
                 # GitHub personal access token
                 token="${{ secrets.TOKEN }}"
 
                 # List of GitHub teams
-                teams=LIST_2
-                echo "List 2: ${teams[@]}"
+                team="$teams ${team[@]}"
+                echo "Teams: ${team[@]}"
 
                 # User to search for
                 target_user="${{ github.actor }}"
