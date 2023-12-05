@@ -77,7 +77,7 @@
                 token="${{ secrets.TOKEN }}"
 
                 # List of GitHub teams
-                team="$teams ${team[@]}"
+                team="$teams ${LIST_2[@]}"
                 echo "Teams: ${team[@]}"
 
                 # User to search for
