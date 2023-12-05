@@ -20,10 +20,10 @@
             run: |
                 echo current working directory: $PWD
                 file_path="./.github/CODEOWNERS"
-                echo ls -la output start
-                cd test
-                ls -la
-                echo ls -la end
+                # echo ls -la output start
+                # cd test
+                # ls -la
+                # echo ls -la end
                 
                 # Fetch the raw content from GitHub
                 content=$(cat ${file_path})
