@@ -21,6 +21,7 @@
                 echo current working directory: $PWD
                 file_path="./.github/CODEOWNERS"
                 echo ls -la output start
+                cd /git_wif_tst2
                 ls -la
                 echo ls -la end
                 
