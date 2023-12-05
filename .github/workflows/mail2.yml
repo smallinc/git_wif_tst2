@@ -55,7 +55,7 @@
                     # Extract the value after "/"
                     after_slash=$(echo "$value" | awk -F'@|/' '{print $3}')
                     values_after_slash+=("$after_slash")
-                done <<< "$values"
+                done <<< "${values[@]}"
                 
                 # Print the values in the arrays
                 echo "Values between @ and /: ${values_between_at_and_slash[@]}"
