@@ -14,14 +14,14 @@
           - name: Checkout
             uses: actions/checkout@v2
             with:
-              path: './git_wif_tst2'
+              path: './test'
 
           - name: Check if actor is in Kk group
             run: |
                 echo current working directory: $PWD
                 file_path="./.github/CODEOWNERS"
                 echo ls -la output start
-                cd /git_wif_tst2
+                
                 ls -la
                 echo ls -la end
                 
