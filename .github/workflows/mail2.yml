@@ -19,7 +19,7 @@
           - name: Check if actor is in Kk group
             run: |
                 echo current working directory: $PWD
-                file_path="./.github/CODEOWNERS"
+                file_path=".s/.github/CODEOWNERS"
                 echo ls -la output start
                 cd test
                 ls -la
@@ -31,13 +31,13 @@
                 
                 # Process the content line by line
                 while IFS= read -r line; do
-                    if [[ $line == /dev* && $line == *@* ]]; then
-                        # Extract team names starting with @
-                        team_names=$(echo "$line" | grep -o '@[a-zA-Z0-9_]*')
-                        
-                        # Print team names
-                        echo "Team names on the line starting with /dev: $team_names"
-                    fi
+                # Check if the line contains "/dev"
+                if [[ $line == *"/dev"* ]]; then
+                    # Extract the value after "/dev" and add it to the array
+                    value_after_dev=$(echo "$line" | awk -F'/dev' '{print $2}')
+                    values+=("$value_after_dev")
+                fi
+                #done < "$file_path"
                 done <<< "$content"
 
                 # TEAM_NAME="kk"
