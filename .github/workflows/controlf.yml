@@ -23,7 +23,7 @@ jobs:
       run: |
         changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
         #changed_files=$(git diff --name-only $GITHUB_SHA^..$GITHUB_SHA)
-        echo "${{ github.actor }}"
+        echo actor :"${{ github.actor }}"
         echo "Changed files:"
         echo "$changed_files"
         echo "$changed_files" | grep -q "^./github/" || exit 0
@@ -38,6 +38,7 @@ jobs:
       run: |
         authorized_user="313rupesh"
         author=$(jq -r '.pull_request.user.login' "$GITHUB_EVENT_PATH" 2>/dev/null || echo "$GITHUB_ACTOR")
+        echo author : $author
         if [ "$author" != "$authorized_user" ]; then
           echo "Unauthorized user. Only $authorized_user can make changes."
           exit 1
