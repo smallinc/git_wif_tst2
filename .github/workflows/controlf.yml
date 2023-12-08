@@ -37,9 +37,9 @@ jobs:
     - name: Check if author is authorized
       run: |
         authorized_user="313rupesh"
-        author=$(jq -r '.pull_request.user.login' "$GITHUB_EVENT_PATH" 2>/dev/null || echo "$GITHUB_ACTOR")
-        echo author : $author
-        if [ "$author" != "$authorized_user" ]; then
+        # author=$(jq -r '.pull_request.user.login' "$GITHUB_EVENT_PATH" 2>/dev/null || echo "$GITHUB_ACTOR")
+        # echo author : $author
+        if [ "${{ github.actor }}" != "$authorized_user" ]; then
           echo "Unauthorized user. Only $authorized_user can make changes."
           exit 1
         fi
