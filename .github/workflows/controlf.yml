@@ -14,6 +14,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      
     - name: Check if changes are in ./github directory
       run: |
         changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
