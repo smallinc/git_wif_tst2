@@ -1,0 +1,35 @@
+name: Restrict Directory Access
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+  push:
+    branches:
+      - '*'
+
+jobs:
+  check-directory:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check if changes are in ./github directory
+      run: |
+        changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
+        echo "$changed_files" | grep -q "^./github/" || exit 0
+        echo "Changes outside ./git directory are not allowed."
+        exit 1
+
+  enforce-authorization:
+    runs-on: ubuntu-latest
+    needs: check-directory
+    steps:
+    - name: Check if author is authorized
+      run: |
+        authorized_user="313rupesh"
+        author=$(jq -r '.pull_request.user.login' "$GITHUB_EVENT_PATH" 2>/dev/null || echo "$GITHUB_ACTOR")
+        if [ "$author" != "$authorized_user" ]; then
+          echo "Unauthorized user. Only $authorized_user can make changes."
+          exit 1
+        fi
