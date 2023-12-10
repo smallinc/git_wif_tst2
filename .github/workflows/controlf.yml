@@ -28,6 +28,7 @@ jobs:
         echo "$changed_files"
         echo "$changed_files" | grep -q "^./github/" || exit 0
         echo "Changes outside ./git directory are not allowed."
+        GITHUB_OUTPUT="rating=failure"
         exit 1
 
   enforce-authorization:
