@@ -26,14 +26,14 @@ jobs:
         echo actor :"${{ github.actor }}"
         echo "Changed files:"
         echo "$changed_files"
-        echo "$changed_files" | grep -q "^./github/" || exit 0
-        echo "Changes outside ./git directory are not allowed."
-        GITHUB_OUTPUT="rating=failure"
-        if [ 1 -eq 1 ]; then
-        echo "Failing the job..."
-        echo "Error: This step failed."  ## Provide an error message
-        exit 1  ## Exit with a non-zero status code
-        fi
+        echo "$changed_files" | grep -q "^./github/" || exit 1
+        # echo "Changes outside ./git directory are not allowed."
+        # GITHUB_OUTPUT="rating=failure"
+        # if [ 1 -eq 1 ]; then
+        # echo "Failing the job..."
+        # echo "Error: This step failed."  ## Provide an error message
+        # exit 1  ## Exit with a non-zero status code
+        # fi
         
 
   enforce-authorization:
