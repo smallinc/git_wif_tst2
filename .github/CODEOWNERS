@@ -2,3 +2,5 @@
 # directory in the root of your repository and any of its 
 # subdirectories.
 /dev @smallinc/kk @smallinc/bdcm @smallinc/tc
+
+/prod dev @smallinc/kk
