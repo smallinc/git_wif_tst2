@@ -118,7 +118,7 @@
                               echo "User $target_user not found in team $team"
                           else
                               echo "User $target_user found in team $team"
-                              exit 0  # Exit the script if user is found
+                              exit 1  # Exit the script if user is found
                           fi
                       }
       
