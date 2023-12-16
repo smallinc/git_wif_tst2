@@ -1,0 +1,152 @@
+---
+
+    name: REUSABLE_WF_AUTHENTICATE
+    on:
+      workflow_call:
+        secrets:
+            GHA_PAT:
+                required: true
+        inputs:
+            PROJECT_NAME:
+                description: 'Project Level'
+                required: true
+                type: string
+
+    
+    # A workflow run is made up of one or more jobs that can run sequentially or in parallel
+    jobs:         
+      WC_Deploy_DBS_Cluster:
+        runs-on: ubuntu-latest
+        strategy:
+          fail-fast: false
+
+       # runs-on: ubuntu-latest
+        # Use the Bash shell regardless of whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+        defaults:
+          run:
+            shell: bash
+
+        steps:
+                - name: Checkout
+                  uses: actions/checkout@v2
+                  with:
+                    path: './test'
+      
+                - name: Check if actor is in Kk group
+                  run: |
+                      #get which directory to check
+                      dir="${{ inputs.PROJECT_NAME }}"
+                      echo "dir input value:"$dir
+
+                      echo current working directory: $PWD
+                      file_path="./.github/CODEOWNERS"
+                      # echo ls -la output start
+                      cd test
+                      # ls -la
+                      # echo ls -la end
+                      
+                      # Fetch the raw content from GitHub
+                      content=$(cat ${file_path})
+                      #echo $content
+                      
+                      # Process the content line by line
+                      while IFS= read -r line; do
+                      # Check if the line contains "/dev"
+                      if [[ $line == *"/dev"* ]]; then
+                          # Extract the value after "/dev" and add it to the array
+                          value_after_dev=$(echo "$line" | awk -F'/dev' '{print $2}')
+                          values+=("$value_after_dev")
+                      fi
+                      #done < "$file_path"
+                      done <<< "$content"
+                      # Print the values in the array
+                      echo "Values after /dev 1: ${values[@]}"
+                      echo "Values after /dev 2: $values"
+                      LIST=($values)
+      
+                      #---------------
+                      # Initialize empty lists to store extracted values
+                      LIST_1=()
+                      LIST_2=()
+      
+                      # Iterate over each value in the original list
+                      for value in "${LIST[@]}"; do
+                          # Extract the value between '@' and '/'
+                          VALUE_BETWEEN_AT_AND_SLASH=${value##*@}
+                          VALUE_BETWEEN_AT_AND_SLASH=${VALUE_BETWEEN_AT_AND_SLASH%%/*}
+      
+                          # Extract the value after '/'
+                          VALUE_AFTER_SLASH=${value##*/}
+      
+                          # Add extracted values to the respective lists
+                          LIST_1+=($VALUE_BETWEEN_AT_AND_SLASH)
+                          LIST_2+=($VALUE_AFTER_SLASH)
+                      done
+      
+                      # Print the extracted values
+                      echo "List 1: ${LIST_1[@]}"
+                      echo "List 2: ${LIST_2[@]}"
+                      
+                      #--------------
+      
+                      # GitHub organization or username
+                      organization="$LIST_1"
+                      echo org: $organization
+      
+                      # GitHub personal access token
+                      token="${{ secrets.TOKEN }}"
+      
+                      # List of GitHub teams
+                      # teams="$teams ${LIST_2[@]}"
+                      # echo "Teams: ${teams[@]}"
+      
+                      # User to search for
+                      target_user="${{ github.actor }}"
+      
+                      # Function to check if a user is in a team
+                      check_user_in_team() {
+                          local team=$1
+                          echo value of team:$team
+                          local result=$(curl -s -H "Authorization: Bearer $token" "https://api.github.com/orgs/$organization/teams/$team/members/$target_user")
+      
+                          if [[ $result == *"Not Found"* ]]; then
+                              echo "User $target_user not found in team $team"
+                          else
+                              echo "User $target_user found in team $team"
+                              exit 0  # Exit the script if user is found
+                          fi
+                      }
+      
+                      # Loop through the teams
+                      for team in "${LIST_2[@]}"; do
+                          check_user_in_team "$team"
+                          #echo Team: $team
+                      done
+      
+                      # If the loop completes without finding the user
+                      echo "User $target_user not found in any team."
+                                      #------------------
+                      # TEAM_NAME="kk"
+                      # USERNAME="${{ github.actor }}"
+                      # TOKEN="${{ secrets.TOKEN }}"
+          
+                      # # Get the team ID by name
+                      # TEAM_ID=$(curl -s -H "Authorization: Bearer $TOKEN" "https://api.github.com/orgs/smallinc/teams/$TEAM_NAME" | jq -r '.id')
+                      # echo $TEAM_ID
+                      # # Check if TEAM_ID is null or empty
+                      # if [ -z "$TEAM_ID" ]; then
+                      #     echo "Team ID is null. Setting default value."
+                      #     TEAM_ID="9090732"
+                      # else
+                      #     echo "Team ID is: $TEAM_ID"
+                      # fi
+                      # # Check if the actor is a member of the team
+                      # if [ "$(curl -s -H "Authorization: Bearer $TOKEN" "https://api.github.com/teams/$TEAM_ID/memberships/$USERNAME" | jq -r '.state')" == "active" ]; then
+                      #     echo "User is in Kelo team. Run your workload here."
+                      # else
+                      #     echo "User is not in Kelo team. Skipping workload."
+                      #     exit 0
+                      # fi  
+      
+                  shell: bash
+            

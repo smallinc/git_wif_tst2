@@ -19,18 +19,17 @@
     jobs:
       check_code_owner:
         runs-on: ubuntu-latest
-    
         steps:
-          - name: Check if actor is in Kk \
-            id: check_owner
-            run: |
-              if [ "$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/orgs/smallinc/teams/Kk/members" | jq '.[].login' | grep -w "${{ github.actor }}" )" ]; then
-                echo "User is in Kk group. Run your workload here."
-              else
-                echo "User is not in Kk group. Skipping workload."
-                exit 0
-              fi
-            shell: bash
+        - name: Check if actor is in Kk \
+          id: check_owner
+          run: |
+            if [ "$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/orgs/smallinc/teams/Kk/members" | jq '.[].login' | grep -w "${{ github.actor }}" )" ]; then
+              echo "User is in Kk group. Run your workload here."
+            else
+              echo "User is not in Kk group. Skipping workload."
+              exit 0
+            fi
+          shell: bash
     
       main_workflow:
         needs: check_code_owner
