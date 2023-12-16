@@ -40,8 +40,8 @@
                 - name: Check if actor is in Kk group
                   run: |
                       #get which directory to check
-                      dir="${{ inputs.PROJECT_NAME }}"
-                      echo "dir input value:"$dir
+                      dir=${{ inputs.PROJECT_NAME }}
+                      echo "dir input value:" $dir
 
                       echo current working directory: $PWD
                       file_path="./.github/CODEOWNERS"
