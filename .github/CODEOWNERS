@@ -3,4 +3,4 @@
 # subdirectories.
 /dev @smallinc/kk @smallinc/bdcm @smallinc/tc
 #new values
-/prod dev @smallinc/kk
+/prod @smallinc/kk
