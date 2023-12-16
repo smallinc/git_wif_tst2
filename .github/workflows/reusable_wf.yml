@@ -57,16 +57,16 @@
                       # Process the content line by line
                       while IFS= read -r line; do
                       # Check if the line contains "/dev"
-                      if [[ $line == *"/$dir"* ]]; then
-                          # Extract the value after "/$dir" and add it to the array
-                          value_after_dev=$(echo "$line" | awk -F'/$dir' '{print $2}')
+                      if [[ $line == *"$dir"* ]]; then
+                          # Extract the value after "$dir" and add it to the array
+                          value_after_dev=$(echo "$line" | awk -F'$dir' '{print $2}')
                           values+=("$value_after_dev")
                       fi
                       #done < "$file_path"
                       done <<< "$content"
                       # Print the values in the array
-                      echo "Values after /$dir 1: ${values[@]}"
-                      echo "Values after /$dir 2: $values"
+                      echo "Values after $dir 1: ${values[@]}"
+                      echo "Values after $dir 2: $values"
                       LIST=($values)
       
                       #---------------
@@ -128,30 +128,6 @@
                           #echo Team: $team
                       done
       
-                      # If the loop completes without finding the user
-                      echo "User $target_user not found in any team."
-                                      #------------------
-                      # TEAM_NAME="kk"
-                      # USERNAME="${{ github.actor }}"
-                      # TOKEN="${{ secrets.TOKEN }}"
-          
-                      # # Get the team ID by name
-                      # TEAM_ID=$(curl -s -H "Authorization: Bearer $TOKEN" "https://api.github.com/orgs/smallinc/teams/$TEAM_NAME" | jq -r '.id')
-                      # echo $TEAM_ID
-                      # # Check if TEAM_ID is null or empty
-                      # if [ -z "$TEAM_ID" ]; then
-                      #     echo "Team ID is null. Setting default value."
-                      #     TEAM_ID="9090732"
-                      # else
-                      #     echo "Team ID is: $TEAM_ID"
-                      # fi
-                      # # Check if the actor is a member of the team
-                      # if [ "$(curl -s -H "Authorization: Bearer $TOKEN" "https://api.github.com/teams/$TEAM_ID/memberships/$USERNAME" | jq -r '.state')" == "active" ]; then
-                      #     echo "User is in Kelo team. Run your workload here."
-                      # else
-                      #     echo "User is not in Kelo team. Skipping workload."
-                      #     exit 0
-                      # fi  
       
                   shell: bash
             
