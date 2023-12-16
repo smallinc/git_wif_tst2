@@ -1,5 +1,5 @@
 ---
-name: Run Workload for Kk Group
+name: Run Workload for Kk reuse Group
 
 on:
     push:
