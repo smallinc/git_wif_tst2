@@ -3,8 +3,8 @@ name: Run Workload for Kk reuse Group
 
 on:
     push:
-        branches:
-        - main
+        # branches:
+        # - main
     workflow_dispatch:
         inputs:
           PROJECT_NAME:
