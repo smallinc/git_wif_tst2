@@ -2,7 +2,7 @@
 name: Run Workload for Kk reuse Group
 
 on:
-    push:
+    # push:
         # branches:
         # - main
     workflow_dispatch:
