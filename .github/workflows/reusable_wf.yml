@@ -41,7 +41,7 @@
                   run: |
                       #get which directory to check
                       dir=${{ inputs.PROJECT_NAME }}
-                      echo "dir input value:" $dir
+                      echo "dir input value: $dir"
 
                       echo current working directory: $PWD
                       file_path="./.github/CODEOWNERS"
