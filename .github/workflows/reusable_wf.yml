@@ -41,7 +41,7 @@
                   run: |
                       #get which directory to check
                       dir=/${{ inputs.PROJECT_NAME }}
-                      echo dir input value: /${dir}
+                      echo dir input value: $dir
 
                       echo current working directory: $PWD
                       file_path="./.github/CODEOWNERS"
@@ -57,7 +57,7 @@
                       # Process the content line by line
                       while IFS= read -r line; do
                       # Check if the line contains "/dev"
-                      if [[ $line == *"/dev"* ]]; then
+                      if [[ $line == *"/$dir"* ]]; then
                           # Extract the value after "/$dir" and add it to the array
                           value_after_dev=$(echo "$line" | awk -F'/$dir' '{print $2}')
                           values+=("$value_after_dev")
