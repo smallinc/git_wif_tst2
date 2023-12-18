@@ -75,7 +75,7 @@
                       list=($values)
 
                       # team list is not empty
-                       if [ ${#my_array[@]} -eq 0 ]; then
+                       if [ ${#list[@]} -eq 0 ]; then
                         echo "No team found in codeowners file"
                         exit 1
                        else
