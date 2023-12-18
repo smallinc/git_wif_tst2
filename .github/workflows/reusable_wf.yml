@@ -42,71 +42,71 @@
                       #get which directory to check
                       dir=/"${{ inputs.PROJECT_NAME }}"
                       echo dir input value: $dir
+                      # GitHub personal access token
+                      token="${{ secrets.TOKEN }}"
+                      # User to search for
+                      target_user="${{ github.actor }}"
 
                       echo current working directory: $PWD
-                      file_path="./.github/CODEOWNERS"
+                      file_path_codeowners="./.github/CODEOWNERS"
                       # echo ls -la output start
                       cd test
                       # ls -la
                       # echo ls -la end
                       
-                      # Fetch the raw content from GitHub
-                      content=$(cat ${file_path})
-                      #echo $content
+                      # Fetch the raw content of codeonwers file 
+                      content_codeowners=$(cat ${file_path_codeowners})
+                      #echo $content_codeowners
                       
                       # Process the content line by line
                       while IFS= read -r line; do
                       # Check if the line contains "/dev"
                       if [[ $line == *$dir* ]]; then
-                          # Extract the value after "/dev" and add it to the array
+                          # Extract the value  for part /dev or /prod directory and add it to the array
                           value_after_dev=$(echo "$line" | awk -F"$dir" '{print $2}')
                           values+=("$value_after_dev")
                       fi
-                      #done < "$file_path"
-                      done <<< "$content"
+                      #done < "$file_path_codeowners"
+                      done <<< "$content_codeowners"
                       # Print the values in the array
                       echo "Values after $dir 1: ${values[@]}"
                       echo "Values after $dir 2: $values"
-                      LIST=($values)
+                      list=($values)
       
                       #---------------
                       # Initialize empty lists to store extracted values
-                      LIST_1=()
-                      LIST_2=()
+                      list_1=()
+                      list_2=()
       
                       # Iterate over each value in the original list
-                      for value in "${LIST[@]}"; do
+                      for value in "${list[@]}"; do
                           # Extract the value between '@' and '/'
-                          VALUE_BETWEEN_AT_AND_SLASH=${value##*@}
-                          VALUE_BETWEEN_AT_AND_SLASH=${VALUE_BETWEEN_AT_AND_SLASH%%/*}
+                          value_between_at_and_slash=${value##*@}
+                          value_between_at_and_slash=${value_between_at_and_slash%%/*}
       
                           # Extract the value after '/'
-                          VALUE_AFTER_SLASH=${value##*/}
+                          value_after_slash=${value##*/}
       
                           # Add extracted values to the respective lists
-                          LIST_1+=($VALUE_BETWEEN_AT_AND_SLASH)
-                          LIST_2+=($VALUE_AFTER_SLASH)
+                          list_1+=($value_between_at_and_slash)
+                          list_2+=($value_after_slash)
                       done
       
                       # Print the extracted values
-                      echo "List 1: ${LIST_1[@]}"
-                      echo "List 2: ${LIST_2[@]}"
+                      echo "list 1: ${list_1[@]}"
+                      echo "list 2: ${list_2[@]}"
                       
                       #--------------
       
-                      # GitHub organization or username
-                      organization="$LIST_1"
+                      # GitHub organization
+                      organization="$list_1"
                       echo org: $organization
-      
-                      # GitHub personal access token
-                      token="${{ secrets.TOKEN }}"
-      
-                      # List of GitHub teams
-                      # teams="$teams ${LIST_2[@]}"
+            
+                      # List of approved teams
+                      # teams="$teams ${list_2[@]}"
                       # echo "Teams: ${teams[@]}"
       
-                      # User to search for
-                      target_user="${{ github.actor }}"
+
       
                       # Function to check if a user is in a team
                       check_user_in_team() {
@@ -115,18 +115,20 @@
                           local result=$(curl -s -H "Authorization: Bearer $token" "https://api.github.com/orgs/$organization/teams/$team/members/$target_user")
       
                           if [[ $result == *"Not Found"* ]]; then
-                              //echo "User $target_user not found in team $team"
+                              echo "User $target_user not found in team $team"
                           else
                               echo "User $target_user found in team $team"
-                              exit 1  # Exit the script if user is found
+                              exit 0  # Exit the script if user is found
                           fi
                       }
       
                       # Loop through the teams
-                      for team in "${LIST_2[@]}"; do
+                      for team in "${list_2[@]}"; do
                           check_user_in_team "$team"
                           #echo Team: $team
                       done
+                      echo "User $target_user not found in team $team"
+                      exit 1
       
       
                   shell: bash
