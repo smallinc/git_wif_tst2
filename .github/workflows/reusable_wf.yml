@@ -73,6 +73,15 @@
                       echo "Values after $dir 1: ${values[@]}"
                       echo "Values after $dir 2: $values"
                       list=($values)
+
+                      # team list is not empty
+                       if [ ${#my_array[@]} -eq 0 ]; then
+                        echo "No team found in codeowners file"
+                        exit 1
+                       else
+                        echo "Team found in codeowners file"
+                        # Continue with other operations if needed
+                       fi
       
                       #---------------
                       # Initialize empty lists to store extracted values
@@ -116,11 +125,18 @@
                           local result=$(curl -s -H "Authorization: Bearer $token" "https://api.github.com/orgs/$organization/teams/$team/members/$target_user")
                           echo $result
       
-                          if [[ $result == *"Bad credentials"* ]]; then
-                              echo "User $target_user not found in team $team"
+
+                          if [[ $result != *"Bad credentials"* ]]; then
+                            if [[ $result == *"Not Found"* ]]; then
+                                echo "User $target_user not found in team $team"
+                            else
+                                echo "User $target_user found in team $team"
+                                exit 0  # Exit the script if user is found
+                            fi
+                            # Add your action 1 code here
                           else
-                              echo "User $target_user found in team $team"
-                              exit 0  # Exit the script if user is found
+                            echo "PAT expired"
+                            exit 1
                           fi
                       }
       
