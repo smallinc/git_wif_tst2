@@ -43,7 +43,7 @@
                       dir=/"${{ inputs.PROJECT_NAME }}"
                       echo dir input value: $dir
                       # GitHub personal access token
-                      token="${{ secrets.TOKEN }}"
+                      token="${{ secrets.GHA_PAT }}"
                       echo $token
                       # User to search for
                       target_user="${{ github.actor }}"
