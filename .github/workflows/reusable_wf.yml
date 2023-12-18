@@ -59,7 +59,7 @@
                       # Check if the line contains "/dev"
                       if [[ $line == *$dir* ]]; then
                           # Extract the value after "/dev" and add it to the array
-                          value_after_dev=$(echo "$line" | awk -F'/dev' '{print $2}')
+                          value_after_dev=$(echo "$line" | awk -F"$dir" '{print $2}')
                           values+=("$value_after_dev")
                       fi
                       #done < "$file_path"
