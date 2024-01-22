@@ -40,7 +40,7 @@ jobs:
           cd ansible
           ls -la
           echo ls -la
-          ansible-playbook .\playbook\test_playbook.yml
+          ansible-playbook ./playbook/test_playbook.yml
       shell: bash
 
     - name: Display custom stat
