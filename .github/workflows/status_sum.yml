@@ -37,7 +37,7 @@ jobs:
           cd test
           ls -la
           echo ls -la
-          cd git_wif_tst2
+          cd git_wif_tst2/ansible
           ls -la
           echo ls -la
           ansible-playbook ./playbook/my_playbook.yml
