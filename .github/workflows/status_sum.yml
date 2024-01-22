@@ -34,7 +34,10 @@ jobs:
     - name: Run the playbook
       run: |
           echo current working directory: $PWD
-          cd test/git_wif_tst2/ansible
+          cd test
+          ls -la
+          echo ls -la
+          cd git_wif_tst2
           ls -la
           echo ls -la
           ansible-playbook ./playbook/my_playbook.yml
