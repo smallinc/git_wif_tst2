@@ -17,6 +17,33 @@ jobs:
 
     steps:
     # Add your build/test steps here
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        path: './test'
+
+    - name: Install Python and Ansible
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y python3 python3-pip
+        pip3 install ansible
+
+    - name: Display Ansible version
+      run: ansible --version
+
+    - name: Run the playbook
+      run: |
+          echo current working directory: $PWD
+          cd test/git_wif_tst2/ansible
+          ls -la
+          echo ls -la
+          ansible-playbook ./playbook/my_playbook.yml
+      shell: bash
+
+    - name: Display custom stat
+      run: |
+        echo "Custom Stat: ${{ env.ANSIBLE_RUN_STATS_MY_CUSTOM_STAT }}"
+
     - name: Set status check - Success
       run: |
         {

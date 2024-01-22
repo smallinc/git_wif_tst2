@@ -1,0 +1,12 @@
+---
+- name: Run Ansible Playbook
+  hosts: localhost
+  tasks:
+    - name: Perform some tasks
+      debug:
+        msg: "Executing tasks..."
+
+    - name: Set custom stats
+      set_stats:
+        data:
+          my_custom_stat: "RAM"
