@@ -1,0 +1,33 @@
+name: Status Summary
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  repository_dispatch:
+    types: [deploy]
+
+jobs:
+  build:
+    name: Test1
+    runs-on: ubuntu-latest
+
+    steps:
+    # Add your build/test steps here
+    - name: Set status check - Success
+      run: |
+        {
+            echo "### :rocket: Workflow inputs"
+            echo "| Arg                 | Value |"
+            echo "| ------------------- | ----- |"
+            echo "| Print inputs        | Rupesh |"
+            echo "| Environment         | Dev|"
+            echo "| Cluster             | F22 |"
+        } >> $GITHUB_STEP_SUMMARY
+
+      
+
+
