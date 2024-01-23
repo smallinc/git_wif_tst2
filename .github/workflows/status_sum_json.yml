@@ -54,7 +54,7 @@ jobs:
         # Read the content of the JSON file
         sudo apt-get install -y jq
         cat /tmp/json_file.json | base64 -d
-        json_content=$(/tmp/json_file.json | base64 -d)
+        json_content=$(cat /tmp/json_file.json | base64 -d)
 
         # Parse the JSON content and print the value of the 'name' key
         name_value=$(echo "$json_content" | jq -r .Name1)
@@ -64,7 +64,7 @@ jobs:
     - name: Set status check - Success
       run: |
         {
-          json_content=$(/tmp/json_file.json | base64 -d)
+          json_content=$(cat /tmp/json_file.json | base64 -d)
 
           # Parse the JSON content and print the value of the 'name' key
           output=$(echo "$json_content" | jq -r .Name1)
