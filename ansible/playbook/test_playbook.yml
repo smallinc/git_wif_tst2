@@ -10,3 +10,8 @@
       set_stats:
         data:
           my_custom_stat: "RAM"
+
+    - name: Save custom stats to a file
+      copy:
+        content: "{{ ansible_run_stats.my_custom_stat }}"
+        dest: "/tmp/custom_stat.txt"

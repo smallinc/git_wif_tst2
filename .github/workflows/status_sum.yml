@@ -14,6 +14,10 @@ jobs:
   build:
     name: Test1
     runs-on: ubuntu-latest
+  
+    outputs:
+      id: custom_stat
+      value: "Default Value"
 
     steps:
     # Add your build/test steps here
@@ -48,9 +52,17 @@ jobs:
       shell: bash
       id: set1
 
-    - name: Display custom stat
+    - name: Read custom stat from file
+      run: echo "::set-output name=custom_stat::$(cat /tmp/custom_stat.txt)"
+      id: set_custom_stat
+
+    - name: Display Custom Stat
       run: |
-        echo "::set-output name=custom_stat::${{ steps.set1.outputs.custom_stat }}"
+        echo "Custom Stat: ${{ needs.build.outputs.custom_stat }}"
+
+    # - name: Display custom stat
+    #   run: |
+    #     echo "::set-output name=custom_stat::${{ steps.set1.outputs.custom_stat }}"
 
     - name: Set status check - Success
       run: |
