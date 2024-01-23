@@ -56,7 +56,7 @@ jobs:
         json_content=$(/tmp/json_file.json | base64 -d)
 
         # Parse the JSON content and print the value of the 'name' key
-        name_value=$(echo "$json_content" | jq -r .name)
+        name_value=$(echo "$json_content" | jq -r .Name1)
         echo "Value of 'name' key: $name_value"
 
 
@@ -67,7 +67,7 @@ jobs:
 
           # Parse the JSON content and print the value of the 'name' key
           output=$(echo "$json_content" | jq -r .Name1)
-            output=$(cat /tmp/custom_stat.txt)
+
             echo "### :rocket: Workflow inputs"
             echo "| Arg                 | Value |"
             echo "| ------------------- | ----- |"
