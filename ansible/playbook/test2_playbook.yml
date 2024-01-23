@@ -26,6 +26,10 @@
     - name: Add a value to the JSON structure
       set_fact:
         existing_data: "{{ existing_data | combine({'Name': 'TREE'}) }}"
+    
+    - name: Add a value to the JSON structure
+      set_fact:
+        existing_data: "{{ existing_data | combine({'Name1': 'Tomato'}) }}"
 
     - name: Save updated JSON content to file
       copy:
