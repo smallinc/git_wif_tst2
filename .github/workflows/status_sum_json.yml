@@ -45,10 +45,6 @@ jobs:
           ls -la
           echo ls -la
           ansible-playbook ./playbook/test2_playbook.yml
-          #custom_stat=$(ansible-playbook ./playbook/test_playbook.yml --json|jq -r .stats.hosts.localhost.my_custom_stat)
-          #echo "Custom Stat: ${{ env.ANSIBLE_RUN_STATS_MY_CUSTOM_STAT }}"
-          #echo "Custom Stat: $custom_stat"
-          #echo "::set-output name=custom_stat::$custom_stat"
       shell: bash
       id: set1
 
@@ -56,6 +52,7 @@ jobs:
       id: step1
       run: |
         # Read the content of the JSON file
+        echo cat /tmp/json_file.json
         json_content=$(cat /tmp/json_file.json)
 
         # Parse the JSON content and print the value of the 'name' key
