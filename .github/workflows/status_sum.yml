@@ -58,7 +58,7 @@ jobs:
 
     - name: Display Custom Stat
       run: |
-        echo "Custom Stat: ${{ hostvars['localhost']['set_custom_stat'] }}"
+        echo "Custom Stat: ${{ custom_stat }}"
 
     # - name: Display custom stat
     #   run: |
