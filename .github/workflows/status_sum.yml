@@ -56,9 +56,9 @@ jobs:
       run: echo "::set-output name=custom_stat::$(cat /tmp/custom_stat.txt)"
       id: set_custom_stat
 
-    - name: Display Custom Stat
-      run: |
-        echo "Custom Stat: ${{ custom_stat }}"
+    # - name: Display Custom Stat
+    #   run: |
+    #     echo "Custom Stat: ${{ custom_stat }}"
 
     # - name: Display custom stat
     #   run: |
