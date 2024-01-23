@@ -40,12 +40,16 @@ jobs:
           cd ansible
           ls -la
           echo ls -la
-          ansible-playbook ./playbook/test_playbook.yml
+          #ansible-playbook ./playbook/test_playbook.yml
+          custom_stat=$(ansible-playbook ./playbook/test_playbook.yml --json | jq -r .stats.hosts.localhost.my_custom_stat)
+          echo "Custom Stat: $custom_stat"
+          echo "::set-output name=custom_stat::$custom_stat"
       shell: bash
+      id: set1
 
     - name: Display custom stat
       run: |
-        echo "Custom Stat: ${{ env.ANSIBLE_RUN_STATS_MY_CUSTOM_STAT }}"
+        echo "::set-output name=custom_stat::${{ steps.set1.outputs.custom_stat }}"
 
     - name: Set status check - Success
       run: |
