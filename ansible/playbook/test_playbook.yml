@@ -10,8 +10,10 @@
       set_stats:
         data:
           my_custom_stat: "RAM"
+        file: /path/to/stats.json
 
-    - name: Save custom stats to a file
-      copy:
-        content: "{{ my_custom_stat }}"
-        dest: "/tmp/custom_stat.txt"
+
+    # - name: Save custom stats to a file
+    #   copy:
+    #     content: "{{ my_custom_stat }}"
+    #     dest: "/tmp/custom_stat.txt"

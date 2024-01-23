@@ -46,15 +46,18 @@ jobs:
           echo ls -la
           ansible-playbook ./playbook/test_playbook.yml
           #custom_stat=$(ansible-playbook ./playbook/test_playbook.yml --json|jq -r .stats.hosts.localhost.my_custom_stat)
-          echo "Custom Stat: ${{ env.ANSIBLE_RUN_STATS_MY_CUSTOM_STAT }}"
+          #echo "Custom Stat: ${{ env.ANSIBLE_RUN_STATS_MY_CUSTOM_STAT }}"
           #echo "Custom Stat: $custom_stat"
           #echo "::set-output name=custom_stat::$custom_stat"
       shell: bash
       id: set1
 
-    - name: Read custom stat from file
-      run: echo "::set-output name=custom_stat::$(cat /tmp/custom_stat.txt)"
-      id: set_custom_stat
+    - name: Process stats data
+      run: cat stats.json
+
+    # - name: Read custom stat from file
+    #   run: echo "::set-output name=custom_stat::$(cat /tmp/custom_stat.txt)"
+    #   id: set_custom_stat
 
     # - name: Display Custom Stat
     #   run: |
