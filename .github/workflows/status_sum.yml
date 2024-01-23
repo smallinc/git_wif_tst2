@@ -70,7 +70,7 @@ jobs:
     - name: Display Custom Stat
       run: |
         # Access the output variable from the previous step
-        previous_output="${{ needs.build.outputs.output_var }}"
+        previous_output="${{ steps.step1.outputs.output_var }}"
         echo "Output from Step 2 using previous output: $previous_output"
 
     # - name: Display custom stat
