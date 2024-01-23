@@ -5,7 +5,7 @@
   tasks:
     - name: Check if JSON file exists
       stat:
-        path: "/temp/json_file.json"
+        path: "/tmp/json_file.json"
       register: json_file_stat
 
     - name: Set initial JSON content
@@ -15,7 +15,7 @@
     - name: Read existing JSON file if it exists
       when: json_file_stat.stat.exists
       slurp:
-        path: "/temp/json_file.json"
+        path: "/tmp/json_file.json"
       register: existing_json
 
     - name: Parse existing JSON content
@@ -30,4 +30,4 @@
     - name: Save updated JSON content to file
       copy:
         content: "{{ existing_data | to_json | b64encode }}"
-        dest: "/temp/json_file.json"
+        dest: "/tmp/json_file.json"
