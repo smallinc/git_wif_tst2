@@ -6,14 +6,17 @@
       debug:
         msg: "Executing tasks..."
 
-    - name: Set custom stats
-      set_stats:
-        data:
-          my_custom_stat: "RAM"
-        file: /path/to/stats.json
+    # - name: Set custom stats
+    #   set_stats:
+    #     data:
+    #       my_custom_stat: "RAM"
+    - name: Set custom stats as facts
+      set_fact:
+        my_custom_stat: "TREE"
+
+    - name: Save custom stat to a file
+      copy:
+        content: "{{ my_custom_stat }}"
+        dest: "/tmp/custom_stat.txt"        
 
 
-    # - name: Save custom stats to a file
-    #   copy:
-    #     content: "{{ my_custom_stat }}"
-    #     dest: "/tmp/custom_stat.txt"
