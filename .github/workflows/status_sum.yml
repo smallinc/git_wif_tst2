@@ -53,11 +53,12 @@ jobs:
       id: set1
 
     - name: Display custom stat from file
-      id: set2
+      id: step1
       run: |
         cat /tmp/custom_stat.txt
         output=$(cat /tmp/custom_stat.txt)
-        echo "Output from Step 1: $output"
+        #echo "Output from Step 1: $output"
+        echo "test=$output" >> "$GITHUB_OUTPUT"
 
         # Set the output as an output variable
         echo "::set-output name=output_var::$output"
@@ -79,10 +80,12 @@ jobs:
     - name: Set status check - Success
       run: |
         {
+            cat /tmp/custom_stat.txt
+            output=$(cat /tmp/custom_stat.txt)
             echo "### :rocket: Workflow inputs"
             echo "| Arg                 | Value |"
             echo "| ------------------- | ----- |"
-            echo "| Print inputs        | ${{ needs.build.outputs.output_var }} |"
+            echo "| Print inputs        | $output |"
             echo "| Environment         | Dev|"
             echo "| Cluster             | F22 |"
         } >> $GITHUB_STEP_SUMMARY
