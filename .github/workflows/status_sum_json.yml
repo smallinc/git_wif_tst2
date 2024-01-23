@@ -56,7 +56,7 @@ jobs:
       id: step1
       run: |
         # Read the content of the JSON file
-        json_content=$(cat /path/to/your/json_file.json)
+        json_content=$(cat /tmp/json_file.json)
 
         # Parse the JSON content and print the value of the 'name' key
         name_value=$(echo "$json_content" | jq -r .name)
@@ -66,7 +66,10 @@ jobs:
     - name: Set status check - Success
       run: |
         {
-            cat /tmp/custom_stat.txt
+          json_content=$(cat /tmp/json_file.json)
+
+          # Parse the JSON content and print the value of the 'name' key
+          output=$(echo "$json_content" | jq -r .name)
             output=$(cat /tmp/custom_stat.txt)
             echo "### :rocket: Workflow inputs"
             echo "| Arg                 | Value |"
