@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
   
     outputs:
-      id: custom_stat
+      id: output_var
       value: "Default Value"
 
     steps:
@@ -53,16 +53,24 @@ jobs:
       id: set1
 
     - name: Display custom stat from file
+      id: set2
       run: |
         cat /tmp/custom_stat.txt
+        output=$(cat /tmp/custom_stat.txt)
+        echo "Output from Step 1: $output"
+
+        # Set the output as an output variable
+        echo "::set-output name=output_var::$output"
 
     # - name: Read custom stat from file
     #   run: echo "::set-output name=custom_stat::$(cat /tmp/custom_stat.txt)"
     #   id: set_custom_stat
 
-    # - name: Display Custom Stat
-    #   run: |
-    #     echo "Custom Stat: ${{ custom_stat }}"
+    - name: Display Custom Stat
+      run: |
+        # Access the output variable from the previous step
+        previous_output="${{ needs.build.outputs.output_var }}"
+        echo "Output from Step 2 using previous output: $previous_output"
 
     # - name: Display custom stat
     #   run: |
@@ -74,7 +82,7 @@ jobs:
             echo "### :rocket: Workflow inputs"
             echo "| Arg                 | Value |"
             echo "| ------------------- | ----- |"
-            echo "| Print inputs        | Rupesh |"
+            echo "| Print inputs        | ${{ needs.build.outputs.output_var }} |"
             echo "| Environment         | Dev|"
             echo "| Cluster             | F22 |"
         } >> $GITHUB_STEP_SUMMARY
