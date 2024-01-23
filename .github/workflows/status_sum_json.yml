@@ -52,7 +52,7 @@ jobs:
       id: step1
       run: |
         # Read the content of the JSON file
-        cat /tmp/json_file.json
+        cat /tmp/json_file.json | base64 -d
         # json_content=$(cat /tmp/json_file.json)
 
         # # Parse the JSON content and print the value of the 'name' key
