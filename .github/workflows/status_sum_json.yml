@@ -52,12 +52,12 @@ jobs:
       id: step1
       run: |
         # Read the content of the JSON file
-        echo cat /tmp/json_file.json
-        json_content=$(cat /tmp/json_file.json)
+        cat /tmp/json_file.json
+        # json_content=$(cat /tmp/json_file.json)
 
-        # Parse the JSON content and print the value of the 'name' key
-        name_value=$(echo "$json_content" | jq -r .name)
-        echo "Value of 'name' key: $name_value"
+        # # Parse the JSON content and print the value of the 'name' key
+        # name_value=$(echo "$json_content" | jq -r .name)
+        # echo "Value of 'name' key: $name_value"
 
 
     - name: Set status check - Success
