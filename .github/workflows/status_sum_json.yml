@@ -52,6 +52,7 @@ jobs:
       id: step1
       run: |
         # Read the content of the JSON file
+        sudo apt-get install -y jq
         cat /tmp/json_file.json | base64 -d
         json_content=$(/tmp/json_file.json | base64 -d)
 
