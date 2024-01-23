@@ -1,0 +1,33 @@
+---
+- name: Set Fact and Add Value to JSON File
+  hosts: localhost
+  gather_facts: true
+  tasks:
+    - name: Check if JSON file exists
+      stat:
+        path: "/path/to/your/json_file.json"
+      register: json_file_stat
+
+    - name: Set initial JSON content
+      set_fact:
+        existing_data: {}
+
+    - name: Read existing JSON file if it exists
+      when: json_file_stat.stat.exists
+      slurp:
+        path: "/path/to/your/json_file.json"
+      register: existing_json
+
+    - name: Parse existing JSON content
+      when: json_file_stat.stat.exists
+      set_fact:
+        existing_data: "{{ existing_json.content | b64decode | from_json }}"
+
+    - name: Add a value to the JSON structure
+      set_fact:
+        existing_data: "{{ existing_data | combine({'Name': 'TREE'}) }}"
+
+    - name: Save updated JSON content to file
+      copy:
+        content: "{{ existing_data | to_json | b64encode }}"
+        dest: "/path/to/your/json_file.json"
