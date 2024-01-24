@@ -53,8 +53,8 @@ jobs:
     - name: Display custom stat from file
       id: step1
       run: |
-        cat /tmp/custom_stat.txt
-        output=$(cat /tmp/custom_stat.txt)
+        cat /tmp/facts_output.json
+        output=$(cat /tmp/facts_output.json)
         #echo "Output from Step 1: $output"
         echo "test=$output" >> "$GITHUB_OUTPUT"
 
@@ -78,23 +78,40 @@ jobs:
     - name: Set status check - Success
       run: |
         {
-            cat /tmp/custom_stat.txt
-            output=$(cat /tmp/custom_stat.txt)
-            echo "### :book: *Workflow inputs*"
-            echo "| Arg                 | Value |"
-            echo "| :-------------------: | :-----: |"
-            echo "| Print inputs        | '${{ inputs.guid }}' |"
-            echo "| Environment         | '${{ inputs.PROJECT_NAME }}'|"
-            echo "| Cluster             | F22 |"
+            # cat /tmp/custom_stat.txt
+            # output=$(cat /tmp/custom_stat.txt)
+            # echo "### :book: *Workflow inputs*"
+            # echo "| Arg                 | Value |"
+            # echo "| :-------------------: | :-----: |"
+            # echo "| Print inputs        | '${{ inputs.guid }}' |"
+            # echo "| Environment         | '${{ inputs.PROJECT_NAME }}'|"
+            # echo "| Cluster             | F22 |"
 
-            echo -e "# $underlined_text #"
-            echo -e "<u>Paraphase</u>"
-            echo "### :star: _*Workflow outputs*_"
-            echo "| Arg                 | Value |"
-            echo "| :------------------- | :----- |"
-            echo "| Print inputs        | $output |"
-            echo "| Environment         | Dev|"
-            echo "| Cluster             | F22 |"
+            # echo -e "# $underlined_text #"
+            # echo -e "<u>Paraphase</u>"
+            # echo "### :star: _*Workflow outputs*_"
+            # echo "| Arg                 | Value |"
+            # echo "| :------------------- | :----- |"
+            # echo "| Print inputs        | $output |"
+            # echo "| Environment         | Dev|"
+            # echo "| Cluster             | F22 |"
+            table1="| Table 1 |      |      |
+            |---------|------|------|
+            | Row 1   |      |      |
+            | Row 2   |      |      |"
+
+            table2="| Table 2 |      |      |
+            |---------|------|------|
+            | Row 1   |      |      |
+            | Row 2   |      |      |"
+
+            echo "<div style=\"display: inline-block;\">"
+            echo "$table1"
+            echo "</div>"
+
+            echo "<div style=\"display: inline-block;\">"
+            echo "$table2"
+            echo "</div>"
         } >> $GITHUB_STEP_SUMMARY
 
       
