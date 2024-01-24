@@ -95,7 +95,7 @@ jobs:
             # echo "| Print inputs        | $output |"
             # echo "| Environment         | Dev|"
             # echo "| Cluster             | F22 |"
-            echo '''
+            echo '''html
             table1="| Table 1 |      |      |
             |---------|------|------|
             | Row 1   |      |      |
