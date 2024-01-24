@@ -96,12 +96,36 @@ jobs:
             # echo "| Environment         | Dev|"
             # echo "| Cluster             | F22 |"
             
-            echo "| Table 1 Heading 1 | Table 1 Heading 2 |   | Table 2 Heading 1 | Table 2 Heading 2 |"
-            echo "|-------------------|-------------------| --- |-------------------|-------------------|"
-            echo "| a                 | b                 |   | 1                 | 2                 |"
-            echo "| not b             | 1                 |   | s                 | d                 |"
-            echo "| and c             | 2                 |   | d                 | f                 |"
-            
+            # echo "| Table 1 Heading 1 | Table 1 Heading 2 |   | Table 2 Heading 1 | Table 2 Heading 2 |"
+            # echo "|-------------------|-------------------| --- |-------------------|-------------------|"
+            # echo "| a                 | b                 |   | 1                 | 2                 |"
+            # echo "| not b             | 1                 |   | s                 | d                 |"
+            # echo "| and c             | 2                 |   | d                 | f                 |"
+            html_code="<table>
+            <tr>
+              <th>Table 1 Heading 1</th>
+              <th>Table 1 Heading 2</th>
+            </tr>
+            <tr>
+              <td>
+
+            | Table 1 | Middle | Table 2 |
+            |---------|--------|---------|
+            | a       | not b  | and c   |
+
+                </td>
+                <td>
+
+            | b | 1 | 2 | 3 |
+            |---|---|---|---|
+            | a | s | d | f |
+
+                </td>
+              </tr>
+            </table>"
+            echo "```html"
+            echo "$html_code"
+            echo "```"
         } >> $GITHUB_STEP_SUMMARY
 
       
