@@ -47,10 +47,6 @@ jobs:
           ls -la
           echo ls -la
           ansible-playbook ./playbook/test_playbook.yml
-          #custom_stat=$(ansible-playbook ./playbook/test_playbook.yml --json|jq -r .stats.hosts.localhost.my_custom_stat)
-          #echo "Custom Stat: ${{ env.ANSIBLE_RUN_STATS_MY_CUSTOM_STAT }}"
-          #echo "Custom Stat: $custom_stat"
-          #echo "::set-output name=custom_stat::$custom_stat"
       shell: bash
       id: set1
 
@@ -72,7 +68,7 @@ jobs:
     - name: Display Custom Stat
       run: |
         # Access the output variable from the previous step
-        previous_output="${{ steps.step1.outputs.output_var }}"
+        previous_output="${{ steps.step1.outputs.test }}"
         echo "Output from Step 2 using previous output: $previous_output"
 
     # - name: Display custom stat
@@ -83,7 +79,7 @@ jobs:
       run: |
         {
             cat /tmp/custom_stat.txt
-            output=$(cat /tmp/custom_stat.txt)\n\r
+            output=$(cat /tmp/custom_stat.txt)
             echo "### :book: *Workflow inputs*"
             echo "| Arg                 | Value |"
             echo "| :-------------------: | :-----: |"

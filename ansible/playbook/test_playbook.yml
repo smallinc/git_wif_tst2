@@ -6,13 +6,16 @@
       debug:
         msg: "Executing tasks..."
 
-    # - name: Set custom stats
-    #   set_stats:
-    #     data:
-    #       my_custom_stat: "RAM"
-    - name: Set custom stats as facts
-      set_fact:
-        my_custom_stat: "TREE"
+    - name: Set custom stats
+      set_stats:
+        data:
+          my_custom_stat: "RAM"
+      per_host: false
+      aggregate: false
+
+    # - name: Set custom stats as facts
+    #   set_fact:
+    #     my_custom_stat: "TREE"
 
     - name: Save custom stat to a file
       copy:
