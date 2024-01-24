@@ -96,15 +96,15 @@ jobs:
             # echo "| Environment         | Dev|"
             # echo "| Cluster             | F22 |"
             echo ```html
-            echo table1="| Table 1 |      |      |
-            echo |---------|------|------|
-            echo | Row 1   |      |      |
-            echo | Row 2   |      |      |"
+            table1="| Table 1 |      |      |
+            |---------|------|------|
+             | Row 1   |      |      |
+            | Row 2   |      |      |"
 
-            echo table2="| Table 2 |      |      |
-            echo |---------|------|------|
-            echo | Row 1   |      |      |
-            echo | Row 2   |      |      |"
+            table2="| Table 2 |      |      |
+            |---------|------|------|
+            | Row 1   |      |      |
+            | Row 2   |      |      |"
 
             echo "<div style=\"display: inline-block;\">"
             echo "$table1"
