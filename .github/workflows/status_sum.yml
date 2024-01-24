@@ -84,7 +84,7 @@ jobs:
         {
             cat /tmp/custom_stat.txt
             output=$(cat /tmp/custom_stat.txt)\n\r
-            echo "### :rocket: *Workflow inputs*"
+            echo "### :book: *Workflow inputs*"
             echo "| Arg                 | Value |"
             echo "| :-------------------: | :-----: |"
             echo "| Print inputs        | '${{ inputs.guid }}' |"
