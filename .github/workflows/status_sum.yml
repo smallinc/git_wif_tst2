@@ -95,6 +95,7 @@ jobs:
             # echo "| Print inputs        | $output |"
             # echo "| Environment         | Dev|"
             # echo "| Cluster             | F22 |"
+            '''
             table1="| Table 1 |      |      |
             |---------|------|------|
             | Row 1   |      |      |
@@ -112,6 +113,7 @@ jobs:
             echo "<div style=\"display: inline-block;\">"
             echo "$table2"
             echo "</div>"
+            '''
         } >> $GITHUB_STEP_SUMMARY
 
       
