@@ -46,7 +46,7 @@ jobs:
           cd ansible
           ls -la
           echo ls -la
-          ansible-playbook ./playbook/test_playbook.yml
+          ANSIBLE_SHOW_CUSTOM_STATS=true ansible-playbook ./playbook/test_playbook.yml
       shell: bash
       id: set1
 
