@@ -12,7 +12,7 @@
 
     - name: Save Ansible Facts
       copy:
-        content: "{{ ansible_facts | to_nice_json }}"
+        content: "{{ my_custom_stat }}"
         dest: "/tmp/facts_output.json"
 
     # - name: Trigger handler to save custom stat to file
