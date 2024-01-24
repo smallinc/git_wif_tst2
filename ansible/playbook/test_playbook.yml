@@ -17,7 +17,7 @@
 
     - name: Save Ansible Facts
       copy:
-        content: "{{ hostvars['localhost']['my_custom_stat'] }}"
+        content: "{{ hostvars[inventory_hostname]['my_custom_stat'] }}"
         dest: "/tmp/facts_output.json"
 
     # - name: Trigger handler to save custom stat to file
