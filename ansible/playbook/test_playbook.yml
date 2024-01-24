@@ -5,7 +5,7 @@
   vars:
       my_custom_stat_value: "RAMEN"
 
-  # tasks:
+  tasks:
   #   - name: Set custom stat
   #     set_stats:
   #       data:
