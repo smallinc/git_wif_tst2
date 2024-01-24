@@ -90,7 +90,7 @@ jobs:
             echo "| Print inputs        | '${{ inputs.guid }}' |"
             echo "| Environment         | '${{ inputs.PROJECT_NAME }}'|"
             echo "| Cluster             | F22 |"
-            echo "#########################"
+            echo "|:-----------:|:-------:|"
             echo "### :rocket: _*Workflow outputs*_"
             echo "| Arg                 | Value |"
             echo "| :------------------- | :----- |"
