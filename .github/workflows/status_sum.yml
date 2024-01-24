@@ -84,14 +84,14 @@ jobs:
         {
             cat /tmp/custom_stat.txt
             output=$(cat /tmp/custom_stat.txt)
-            echo "### :rocket: Workflow inputs"
+            echo "### :rocket: **Workflow inputs**"
             echo "| Arg                 | Value |"
             echo "| ------------------- | ----- |"
             echo "| Print inputs        | '${{ inputs.guid }}' |"
             echo "| Environment         | '${{ inputs.PROJECT_NAME }}'|"
             echo "| Cluster             | F22 |"
             echo "#########################"
-            echo "### :rocket: Workflow outputs"
+            echo "### :rocket: _Workflow outputs_"
             echo "| Arg                 | Value |"
             echo "| ------------------- | ----- |"
             echo "| Print inputs        | $output |"
