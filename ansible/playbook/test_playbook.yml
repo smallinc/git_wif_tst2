@@ -5,11 +5,11 @@
   vars:
       my_custom_stat_value: "RAMEN"
 
-  tasks:
-    - name: Set custom stat
-      set_stats:
-        data:
-          my_custom_stat: "{{ my_custom_stat_value }}"
+  # tasks:
+  #   - name: Set custom stat
+  #     set_stats:
+  #       data:
+  #         my_custom_stat: "{{ my_custom_stat_value }}"
   
     # - name: Print Variables
     #   debug:
@@ -35,7 +35,7 @@
 
     - name: Save custom stat to a file
       copy:
-        content: "{{ my_custom_stat }}"
+        content: "{{ my_custom_stat_value }}"
         dest: "/tmp/custom_stat.txt"        
 
 
