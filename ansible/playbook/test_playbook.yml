@@ -23,19 +23,19 @@
     # - name: Trigger handler to save custom stat to file
     #   meta: flush_handlers
 
-  handlers:
-    - name: Save custom stat to file
-      blockinfile:
-        path: "/tmp/custom_stat.txt"
-        block: "{{ my_custom_stat_value }}"
+  # handlers:
+  #   - name: Save custom stat to file
+  #     blockinfile:
+  #       path: "/tmp/custom_stat.txt"
+  #       block: "{{ my_custom_stat_value }}"
 
     # - name: Set custom stats as facts
     #   set_fact:
     #     my_custom_stat: "TREE"
 
-    # - name: Save custom stat to a file
-    #   copy:
-    #     content: "{{ my_custom_stat }}"
-    #     dest: "/tmp/custom_stat.txt"        
+    - name: Save custom stat to a file
+      copy:
+        content: "{{ my_custom_stat }}"
+        dest: "/tmp/custom_stat.txt"        
 
 
