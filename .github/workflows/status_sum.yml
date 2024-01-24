@@ -82,16 +82,16 @@ jobs:
     - name: Set status check - Success
       run: |
         {
-            cat /tmp/custom_stat.txt
-            output=$(cat /tmp/custom_stat.txt)
-            echo "### :rocket: **Workflow inputs**"
+            >cat /tmp/custom_stat.txt
+            output=$(cat /tmp/custom_stat.txt)\n\r
+            echo "### :rocket: *Workflow inputs*"
             echo "| Arg                 | Value |"
             echo "| ------------------- | ----- |"
             echo "| Print inputs        | '${{ inputs.guid }}' |"
             echo "| Environment         | '${{ inputs.PROJECT_NAME }}'|"
             echo "| Cluster             | F22 |"
             echo "#########################"
-            echo "### :rocket: _Workflow outputs_"
+            echo "### :rocket: _*Workflow outputs*_"
             echo "| Arg                 | Value |"
             echo "| ------------------- | ----- |"
             echo "| Print inputs        | $output |"
