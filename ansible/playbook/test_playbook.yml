@@ -1,6 +1,7 @@
 ---
 - name: Run Ansible Playbook
   hosts: localhost
+  gather_facts: true
   vars:
       my_custom_stat_value: "RAMEN"
 
@@ -9,10 +10,14 @@
       set_stats:
         data:
           my_custom_stat: "{{ my_custom_stat_value }}"
+  
+    - name: Print Variables
+      debug:
+        var: hostvars[inventory_hostname]
 
     - name: Save Ansible Facts
       copy:
-        content: "{{ hostvars[localhost]['my_custom_stat'] }}"
+        content: "{{ hostvars['localhost']['my_custom_stat'] }}"
         dest: "/tmp/facts_output.json"
 
     # - name: Trigger handler to save custom stat to file
