@@ -92,7 +92,7 @@ jobs:
             echo "| Cluster             | F22 |"
 
             echo -e "# $underlined_text #"
-            echo "<u>$Paraphase</u>"
+            echo "<u>Paraphase</u>"
             echo "### :rocket: _*Workflow outputs*_"
             echo "| Arg                 | Value |"
             echo "| :------------------- | :----- |"
