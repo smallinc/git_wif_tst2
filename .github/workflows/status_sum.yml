@@ -96,11 +96,11 @@ jobs:
             # echo "| Environment         | Dev|"
             # echo "| Cluster             | F22 |"
             
-            echo | Table 1 Heading 1 | Table 1 Heading 2 |   | Table 2 Heading 1 | Table 2 Heading 2 |
-            echo |-------------------|-------------------|---|-------------------|-------------------|
-            echo | a                 | b                 |   | 1                 | 2                 |
-            echo | not b             | 1                 |   | s                 | d                 |
-            echo | and c             | 2                 |   | d                 | f                 |
+            echo "| Table 1 Heading 1 | Table 1 Heading 2 |   | Table 2 Heading 1 | Table 2 Heading 2 |"
+            echo "|-------------------|-------------------|---|-------------------|-------------------|"
+            echo "| a                 | b                 |   | 1                 | 2                 |"
+            echo "| not b             | 1                 |   | s                 | d                 |"
+            echo "| and c             | 2                 |   | d                 | f                 |"
             
         } >> $GITHUB_STEP_SUMMARY
 
