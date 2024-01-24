@@ -102,27 +102,27 @@ jobs:
             # echo "| not b             | 1                 |   | s                 | d                 |"
             # echo "| and c             | 2                 |   | d                 | f                 |"
             html_code="<table>
-            <tr>
-              <th>Table 1 Heading 1</th>
-              <th>Table 1 Heading 2</th>
-            </tr>
-            <tr>
-              <td>
-
-            | Table 1 | Middle | Table 2 |
-            |---------|--------|---------|
-            | a       | not b  | and c   |
-
-                </td>
+              <tr>
+                <th>Table 1 Heading 1</th>
+                <th>Table 1 Heading 2</th>
+              </tr>
+              <tr>
                 <td>
 
-            | b | 1 | 2 | 3 |
-            |---|---|---|---|
-            | a | s | d | f |
+              | Table 1 | Middle | Table 2 |
+              |---------|--------|---------|
+              | a       | not b  | and c   |
 
-                </td>
-              </tr>
-            </table>"
+                  </td>
+                  <td>
+
+              | b | 1 | 2 | 3 |
+              |---|---|---|---|
+              | a | s | d | f |
+
+                  </td>
+                </tr>
+              </table>"
             echo "```html"
             echo "$html_code"
             echo "```"
