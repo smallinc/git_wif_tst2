@@ -10,8 +10,8 @@
       set_stats:
         data:
           my_custom_stat: "RAM"
-      per_host: false
-      aggregate: false
+        per_host: false
+        aggregate: false
 
     # - name: Set custom stats as facts
     #   set_fact:
