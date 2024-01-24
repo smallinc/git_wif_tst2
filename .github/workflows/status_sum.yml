@@ -96,23 +96,30 @@ jobs:
             # echo "| Environment         | Dev|"
             # echo "| Cluster             | F22 |"
             echo ```html
-            table1="| Table 1 |      |      |
-            |---------|------|------|
-             | Row 1   |      |      |
-            | Row 2   |      |      |"
+            html_code="<table>
+              <tr>
+                <th>Table 1 Heading 1</th>
+                <th>Table 1 Heading 2</th>
+              </tr>
+              <tr>
+                <td>
 
-            table2="| Table 2 |      |      |
-            |---------|------|------|
-            | Row 1   |      |      |
-            | Row 2   |      |      |"
+            | Table 1 | Middle | Table 2 |
+            |---------|--------|---------|
+            | a       | not b  | and c   |
 
-            echo "<div style=\"display: inline-block;\">"
-            echo "$table1"
-            echo "</div>"
+                </td>
+                <td>
 
-            echo "<div style=\"display: inline-block;\">"
-            echo "$table2"
-            echo "</div>"
+            | b | 1 | 2 | 3 |
+            |---|---|---|---|
+            | a | s | d | f |
+
+                </td>
+              </tr>
+            </table>"
+
+            echo "$html_code"
             echo ```
         } >> $GITHUB_STEP_SUMMARY
 
