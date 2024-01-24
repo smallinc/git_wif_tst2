@@ -82,7 +82,7 @@ jobs:
     - name: Set status check - Success
       run: |
         {
-            >cat /tmp/custom_stat.txt
+            cat /tmp/custom_stat.txt
             output=$(cat /tmp/custom_stat.txt)\n\r
             echo "### :rocket: *Workflow inputs*"
             echo "| Arg                 | Value |"
