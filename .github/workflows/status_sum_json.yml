@@ -98,7 +98,7 @@ jobs:
             echo "### :rocket: Workflow inputs"
             echo "| Arg                 | Value |"
             echo "| ------------------- | ----- |"
-            echo "| Print inputs        | parse_json "Name"|"
+            echo "| Print inputs        | $(parse_json "Name")|"
             echo "| Environment         | Dev|"
             echo "| Cluster             | F22 |"
         } >> $GITHUB_STEP_SUMMARY
