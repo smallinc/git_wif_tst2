@@ -78,49 +78,30 @@ jobs:
     - name: Set status check - Success
       run: |
         {
-            # cat /tmp/custom_stat.txt
-            # output=$(cat /tmp/custom_stat.txt)
-            # echo "### :book: *Workflow inputs*"
-            # echo "| Arg                 | Value |"
-            # echo "| :-------------------: | :-----: |"
-            # echo "| Print inputs        | '${{ inputs.guid }}' |"
-            # echo "| Environment         | '${{ inputs.PROJECT_NAME }}'|"
-            # echo "| Cluster             | F22 |"
+            cat /tmp/custom_stat.txt
+            output=$(cat /tmp/custom_stat.txt)
+            echo "### :book: *Workflow inputs*"
+            echo "| Arg                 | Value |"
+            echo "| :-------------------: | :-----: |"
+            echo "| GUID       | ${{ inputs.guid }} |"
+            echo "| Project Name        | ${{ inputs.PROJECT_NAME }}|"
+            echo "| Cluster             | F22 |"
 
-            # echo -e "# $underlined_text #"
-            # echo -e "<u>Paraphase</u>"
-            # echo "### :star: _*Workflow outputs*_"
-            # echo "| Arg                 | Value |"
-            # echo "| :------------------- | :----- |"
-            # echo "| Print inputs        | $output |"
-            # echo "| Environment         | Dev|"
-            # echo "| Cluster             | F22 |"
+            echo -e "# $underlined_text #"
+            echo -e "<u>Paraphase</u>"
+            echo "### :star: _*Workflow outputs*_"
+            echo "| Arg                 | Value |"
+            echo "| :------------------- | :----- |"
+            echo "| Print inputs        | $output |"
+            echo "| Environment         | Dev|"
+            echo "| Cluster             | F22 |"
             
             # echo "| Table 1 Heading 1 | Table 1 Heading 2 |   | Table 2 Heading 1 | Table 2 Heading 2 |"
             # echo "|-------------------|-------------------| --- |-------------------|-------------------|"
             # echo "| a                 | b                 |   | 1                 | 2                 |"
             # echo "| not b             | 1                 |   | s                 | d                 |"
             # echo "| and c             | 2                 |   | d                 | f                 |"
-            table1="| Table 1 |      |      |
-            |---------|------|------|
-            | Row 1   |      |      |
-            | Row 2   |      |      |"
 
-            table2="| Table 2 |      |      |
-            |---------|------|------|
-            | Row 1   |      |      |
-            | Row 2   |      |      |"
-
-            html_code="<div style=\"display: inline-block;\">
-              $table1
-            </div>
-
-            <div style=\"display: inline-block;\">
-              $table2
-            </div>"
-            echo "```html"
-            echo "$html_code"
-            echo "```"
         } >> $GITHUB_STEP_SUMMARY
 
       
