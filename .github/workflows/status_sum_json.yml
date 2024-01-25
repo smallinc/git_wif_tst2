@@ -88,7 +88,7 @@ jobs:
           }
 
           # Call the function with user input
-          parse_json "$key_name"
+          parse_json "Name"
 
           # json_content=$(cat /tmp/json_file.json | base64 -d)
 
@@ -98,7 +98,7 @@ jobs:
             echo "### :rocket: Workflow inputs"
             echo "| Arg                 | Value |"
             echo "| ------------------- | ----- |"
-            echo "| Print inputs        | parse_json "$key_name"|"
+            echo "| Print inputs        | parse_json "Name"|"
             echo "| Environment         | Dev|"
             echo "| Cluster             | F22 |"
         } >> $GITHUB_STEP_SUMMARY
