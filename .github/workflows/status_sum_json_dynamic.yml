@@ -63,6 +63,16 @@ jobs:
 
     - name: Set status check - Success
       run: |
+        {
+          echo "### :book: *Workflow inputs*"
+          echo "| Parameter   | Value |"
+          echo "| :-------- | :----- |"
+          echo "| Release Branch | ${RELEASE_BRANCH} |"
+          echo "| Project Name   | ${PROJECT_NAME}|"
+          echo "| App Name       | ${APP_NAME}|"
+          echo "| Config File Name | ${CONFIG_FILE_NAME}|"
+            
+        } >> $GITHUB_STEP_SUMMARY
         json_file="/tmp/json_file.json"
         output_file="$GITHUB_STEP_SUMMARY"
         
