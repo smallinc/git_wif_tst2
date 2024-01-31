@@ -71,6 +71,8 @@ jobs:
           echo "| Project Name   | ${PROJECT_NAME}|"
           echo "| App Name       | ${APP_NAME}|"
           echo "| Config File Name | ${CONFIG_FILE_NAME}|"
+          echo 
+          echo "### :book: *Workflow Outputs*"
             
         } >> $GITHUB_STEP_SUMMARY
         json_file="/tmp/json_file.json"
@@ -84,7 +86,7 @@ jobs:
         base64 -d "$json_file" > decoded_json.json
         
         # Start Markdown table
-        echo "| Key | Value |" >> "$output_file"
+        echo "| Parameter | Value |" >> "$output_file"
         echo "| --- | ----- |" >> "$output_file"
         
         # Loop through keys and values
