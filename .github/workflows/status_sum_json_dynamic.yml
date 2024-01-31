@@ -64,7 +64,7 @@ jobs:
     - name: Set status check - Success
       run: |
         {
-          echo "### :book: *Workflow inputs*"
+          echo "### :book: *Workflow Inputs*"
           echo "| Parameter   | Value |"
           echo "| :-------- | :----- |"
           echo "| Release Branch | ${RELEASE_BRANCH} |"

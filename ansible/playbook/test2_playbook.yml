@@ -39,6 +39,10 @@
       set_fact:
         existing_data: "{{ existing_data | combine({'Name3': 'Grapes'}) }}"
 
+    - name: Add a value to the JSON structure
+      set_fact:
+        existing_data: "{{ existing_data | combine({'Name4': 'Banana'}) }}"
+
     - name: Save updated JSON content to file
       copy:
         content: "{{ existing_data | to_json | b64encode }}"
