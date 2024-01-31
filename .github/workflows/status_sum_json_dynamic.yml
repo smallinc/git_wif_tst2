@@ -71,13 +71,14 @@ jobs:
             echo "jq is not installed. Please install jq to run this script."
             exit 1
         fi
+        base64 -d "$json_file" > decoded_json.json
         
         # Start Markdown table
         echo "| Key | Value |" > "$output_file"
         echo "| --- | ----- |" >> "$output_file"
         
         # Loop through keys and values
-        jq -r 'to_entries | .[] | "\(.key) \(.value)"' "$json_file" |
+        jq -r 'to_entries | .[] | "\(.key) \(.value)"' decoded_json.json |
         while read -r line; do
             key=$(echo "$line" | awk '{print $1}')
             value=$(echo "$line" | awk '{print $2}')
