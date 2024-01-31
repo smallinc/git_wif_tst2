@@ -1,0 +1,92 @@
+name: Status Summary Dynamic
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  repository_dispatch:
+    types: [deploy]
+
+jobs:
+  build:
+    name: Test1
+    runs-on: ubuntu-latest
+  
+    outputs:
+      id: output_var
+      value: "Default Value"
+
+    steps:
+    # Add your build/test steps here
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        path: './test'
+
+    - name: Install Python and Ansible
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y python3 python3-pip
+        pip3 install ansible
+
+    - name: Display Ansible version
+      run: ansible --version
+
+    - name: Run the playbook
+      run: |
+          echo current working directory: $PWD
+          cd test
+          ls -la
+          echo ls -la
+          cd ansible
+          ls -la
+          echo ls -la
+          ansible-playbook ./playbook/test2_playbook.yml
+      shell: bash
+      id: set1
+
+    - name: Display custom stat from file
+      id: step1
+      run: |
+        # Read the content of the JSON file
+        sudo apt-get install -y jq
+        cat /tmp/json_file.json | base64 -d
+        json_content=$(cat /tmp/json_file.json | base64 -d)
+
+        # Parse the JSON content and print the value of the 'name' key
+        name_value=$(echo "$json_content" | jq -r .Name1)
+        echo "Value of 'name' key: $name_value"
+
+
+    - name: Set status check - Success
+      run: |
+        json_file="/tmp/json_file.json"
+        output_file="GITHUB_STEP_SUMMARY"
+        
+        # Check if jq is installed
+        if ! command -v jq &> /dev/null; then
+            echo "jq is not installed. Please install jq to run this script."
+            exit 1
+        fi
+        
+        # Start Markdown table
+        echo "| Key | Value |" > "$output_file"
+        echo "| --- | ----- |" >> "$output_file"
+        
+        # Loop through keys and values
+        jq -r 'to_entries | .[] | "\(.key) \(.value)"' "$json_file" |
+        while read -r line; do
+            key=$(echo "$line" | awk '{print $1}')
+            value=$(echo "$line" | awk '{print $2}')
+            # Add row to Markdown table
+            echo "| $key | $value |" >> "$output_file"
+        done
+        
+        echo "Markdown table created and saved to $output_file."
+
+      
+
+
