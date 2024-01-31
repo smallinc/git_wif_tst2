@@ -84,7 +84,7 @@ jobs:
         base64 -d "$json_file" > decoded_json.json
         
         # Start Markdown table
-        echo "| Key | Value |" > "$output_file"
+        echo "| Key | Value |" >> "$output_file"
         echo "| --- | ----- |" >> "$output_file"
         
         # Loop through keys and values
