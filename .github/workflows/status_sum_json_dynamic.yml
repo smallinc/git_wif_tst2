@@ -64,7 +64,7 @@ jobs:
     - name: Set status check - Success
       run: |
         json_file="/tmp/json_file.json"
-        output_file="GITHUB_STEP_SUMMARY"
+        output_file="$GITHUB_STEP_SUMMARY"
         
         # Check if jq is installed
         if ! command -v jq &> /dev/null; then
