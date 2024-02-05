@@ -25,7 +25,7 @@
 
     - name: Add a value to the JSON structure
       set_fact:
-        existing_data: "{{ existing_data | combine({'Name': 'TREE'}) }}"
+        existing_data: "{{ existing_data | combine({'Name'1: 'TREE'}) }}"
     
     - name: Add a value to the JSON structure
       set_fact:
