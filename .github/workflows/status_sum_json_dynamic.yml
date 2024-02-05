@@ -115,7 +115,7 @@ jobs:
       if: ${{ failure() }}
       run: |
         echo current working directory: $PWD
-        echo ls -la
+        ls -la
         # cd test
         # echo current working directory1: $PWD
         echo 
