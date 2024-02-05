@@ -114,6 +114,10 @@ jobs:
     - name: Log if any of the previous steps fail
       if: ${{ failure() }}
       run: |
+        echo current working directory: $PWD
+        cd test
+        echo current working directory1: $PWD
+        echo 
         echo "One or more previous steps failed. Viewing GitHub Actions Run log..."
         gh run view ${{ github.run_id }} --log-failed >> $GITHUB_STEP_SUMMARY
 
