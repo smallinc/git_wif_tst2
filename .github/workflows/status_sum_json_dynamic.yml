@@ -22,6 +22,12 @@ jobs:
 
     steps:
     # Add your build/test steps here
+    - name: Set up GitHub CLI
+      run: |
+        echo "Setting up GitHub CLI"
+        echo "${{ secrets.GH_TOKEN }}" > gh_token
+        gh auth login --with-token < gh_token
+
     - name: Checkout
       uses: actions/checkout@v2
       with:
@@ -99,11 +105,7 @@ jobs:
             echo "| $key | $value |" >> "$output_file"
         done
 
-    - name: Set up GitHub CLI
-      run: |
-        echo "Setting up GitHub CLI"
-        echo "${{ secrets.GH_TOKEN }}" > gh_token
-        gh auth login --with-token < gh_token
+
 
       
     - name: Log if any of the previous steps fail
