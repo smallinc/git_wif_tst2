@@ -54,7 +54,7 @@ jobs:
           cd ansible
           ls -la
           echo ls -la
-          ansible-playbook ./playbook/test2_playbook.yml >> $GITHUB_STEP_SUMMARY 2>&1
+          ansible-playbook ./playbook/test2_playbook.yml 2>&1 | tee -a $GITHUB_STEP_SUMMARY | grep 'FAILED' 
       shell: bash
       id: set1
 
