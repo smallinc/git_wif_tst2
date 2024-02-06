@@ -54,6 +54,7 @@ jobs:
           cd ansible
           ls -la
           echo ls -la
+          #ansible-playbook ./playbook/test2_playbook.yml 2>&1 | tee log_file.txt | grep -E 'FAILED|ERROR' > $GITHUB_STEP_SUMMARY
           ansible-playbook ./playbook/test2_playbook.yml 2>&1 | tee log_file.txt | grep -E 'FAILED|ERROR' > $GITHUB_STEP_SUMMARY
       shell: bash
       id: set1
@@ -118,7 +119,9 @@ jobs:
         ls -la
         cd test
         echo current working directory1: $PWD
+        ls -la
         echo 
+        cat ${{ github.workspace }}/test/ansible/ansible-log.txt
         echo "One or more previous steps failed. Viewing GitHub Actions Run log..."
         gh run view ${{ github.run_id }} --log-failed >> $GITHUB_STEP_SUMMARY
 
