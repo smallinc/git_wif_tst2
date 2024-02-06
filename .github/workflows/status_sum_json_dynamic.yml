@@ -124,7 +124,7 @@ jobs:
         ls -la
         echo 
         #cat ${{ github.workspace }}/test/ansible/ansible.log
-        grep -E 'FAILED|ERROR' >> $GITHUB_STEP_SUMMARY
+        cat ./ansible.log | grep -E 'FAILED|ERROR' >> $GITHUB_STEP_SUMMARY
         echo "One or more previous steps failed. Viewing GitHub Actions Run log..."
         #gh run view ${{ github.run_id }} --log-failed >> $GITHUB_STEP_SUMMARY
 
