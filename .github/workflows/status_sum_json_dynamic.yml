@@ -54,7 +54,7 @@ jobs:
           cd ansible
           ls -la
           echo ls -la
-          ansible-playbook ./playbook/test2_playbook.yml
+          ansible-playbook ./playbook/test2_playbook.yml 2> $GITHUB_STEP_SUMMARY
       shell: bash
       id: set1
 
