@@ -126,7 +126,7 @@ jobs:
           echo "Ansible log file not found. Failed in GitHub environment." >> $GITHUB_STEP_SUMMARY
         else 
           echo 
-          echo "### :red_circle: *Workflow Error*" >> $GITHUB_STEP_SUMMARY
+          echo "### :red_circle: *Workflow Errors*" >> $GITHUB_STEP_SUMMARY
           echo  >> $GITHUB_STEP_SUMMARY
           #cat ${{ github.workspace }}/test/ansible/ansible.log
           #cat ./ansible.log | tail -n 10 >> $GITHUB_STEP_SUMMARY
