@@ -3,58 +3,59 @@
   hosts: localhost
   gather_facts: true
   tasks:
-    -block:
 
-      - name: Check if JSON file exists
-        stat:
-          path: "/tmp/json_file.json"
-        register: json_file_stat
+    - block:
 
-      - name: Set initial JSON content
-        set_fact:
-          existing_data: {}
+        - name: Check if JSON file exists
+          stat:
+            path: "/tmp/json_file.json"
+          register: json_file_stat
 
-      - name: Read existing JSON file if it exists
-        when: json_file_stat.stat.exists
-        slurp:
-          path: "/tmp/json_file.json"
-        register: existing_json
+        - name: Set initial JSON content
+          set_fact:
+            existing_data: {}
 
-      - name: Parse existing JSON content
-        when: json_file_stat.stat.exists
-        set_fact:
-          existing_data: "{{ existing_json.content | b64decode | from_json }}"
+        - name: Read existing JSON file if it exists
+          when: json_file_stat.stat.exists
+          slurp:
+            path: "/tmp/json_file.json"
+          register: existing_json
 
-      - name: Add a value to the JSON structure
-        set_fact:
-          existing_data: "{{ existing_data | combine({'Name'1: 'TREE'}) }}"
+        - name: Parse existing JSON content
+          when: json_file_stat.stat.exists
+          set_fact:
+            existing_data: "{{ existing_json.content | b64decode | from_json }}"
+
+        - name: Add a value to the JSON structure
+          set_fact:
+            existing_data: "{{ existing_data | combine({'Name'1: 'TREE'}) }}"
+        
+        - name: Add a value to the JSON structure
+          set_fact:
+            existing_data: "{{ existing_data | combine({'Name1': 'Tomato'}) }}"
+
+        - name: Add a value to the JSON structure
+          set_fact:
+            existing_data: "{{ existing_data | combine({'Name2': 'Papaya'}) }}"
       
-      - name: Add a value to the JSON structure
-        set_fact:
-          existing_data: "{{ existing_data | combine({'Name1': 'Tomato'}) }}"
+        - name: Add a value to the JSON structure
+          set_fact:
+            existing_data: "{{ existing_data | combine({'Name3': 'Grapes'}) }}"
 
-      - name: Add a value to the JSON structure
-        set_fact:
-          existing_data: "{{ existing_data | combine({'Name2': 'Papaya'}) }}"
-    
-      - name: Add a value to the JSON structure
-        set_fact:
-          existing_data: "{{ existing_data | combine({'Name3': 'Grapes'}) }}"
+        - name: Add a value to the JSON structure
+          set_fact:
+            existing_data: "{{ existing_data | combine({'Name4': 'Banana'}) }}"
 
-      - name: Add a value to the JSON structure
-        set_fact:
-          existing_data: "{{ existing_data | combine({'Name4': 'Banana'}) }}"
+        - name: Save updated JSON content to file
+          copy:
+            content: "{{ existing_data | to_json | b64encode }}"
+            dest: "/tmp/json_file.json"
 
-      - name: Save updated JSON content to file
-        copy:
-          content: "{{ existing_data | to_json | b64encode }}"
-          dest: "/tmp/json_file.json"
+      rescue:
 
-    rescue:
-
-      - name: Record failure
-        lineinfile:
-          path: /tmp/execution-failures.txt
-          line: '"{{ inventory_hostname }}","{{ ansible_failed_task[''name''] }}","{{ ansible_failed_result[''module_stderr''] }}","{{ ansible_failed_result[''stdout''] }}"'
-          create: yes
-        delegate_to: localhost
+        - name: Record failure
+          lineinfile:
+            path: /tmp/execution-failures.txt
+            line: '"{{ inventory_hostname }}","{{ ansible_failed_task[''name''] }}","{{ ansible_failed_result[''module_stderr''] }}","{{ ansible_failed_result[''stdout''] }}"'
+            create: yes
+          delegate_to: localhost
