@@ -56,6 +56,6 @@
         - name: Record failure
           lineinfile:
             path: /tmp/execution-failures.txt
-            line: '"{{ inventory_hostname }}","{{ ansible_failed_task[''name''] }}","{{ ansible_failed_result[''module_stderr''] }}","{{ ansible_failed_result[''stdout''] }}"'
+            line: '"{{ inventory_hostname }}","{{ ansible_failed_task[''name''] }}","{{ ansible_failed_result[''stdout''] }}"'
             create: yes
           delegate_to: localhost
