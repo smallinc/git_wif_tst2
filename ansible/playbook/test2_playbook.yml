@@ -58,7 +58,7 @@
 
         - name: Display ansible_failed_result
           debug:
-            var: ansible_failed_result
+            var: ansible_failed_task
 
           # debug:
           #   msg: "Task- {{ ansible_failed_task }} failed with error {{ ansible_failed_result }}"
