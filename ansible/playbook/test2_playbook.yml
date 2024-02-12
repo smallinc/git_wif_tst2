@@ -60,6 +60,9 @@
           debug:
             var: ansible_failed_result
 
+          debug:
+            msg: "Task- {{ ansible_failed_task }} failed with error {{ ansible_failed_result }}"
+            
         - name: Record failure
           lineinfile:
             path: /tmp/execution-failures.txt
