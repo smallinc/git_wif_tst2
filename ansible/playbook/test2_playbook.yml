@@ -51,12 +51,14 @@
             content: "{{ existing_data | to_json | b64encode }}"
             dest: "/tmp/json_file.json"
         
-        - name: Display ansible_failed_result
-          debug:
-            var: ansible_failed_result
+
           
 
       rescue:
+
+        - name: Display ansible_failed_result
+          debug:
+            var: ansible_failed_result
 
         - name: Record failure
           lineinfile:
