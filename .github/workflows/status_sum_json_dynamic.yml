@@ -126,13 +126,14 @@ jobs:
           echo "Ansible log file not found. Failed in GitHub environment." >> $GITHUB_STEP_SUMMARY
         else 
           echo 
-          #ansible_path="./ansible.log"
-          ansible_path="/tmp/execution-failures.txt"
+          ansible_path="./ansible.log"
+          #ansible_path="/tmp/execution-failures.txt"
           echo "### :red_circle: *Workflow Errors*" >> $GITHUB_STEP_SUMMARY
           echo  >> $GITHUB_STEP_SUMMARY
           #cat ${{ github.workspace }}/test/ansible/ansible.log
-          #cat ./ansible.log | tail -n 10 >> $GITHUB_STEP_SUMMARY
-          cat "$ansible_path" >> $GITHUB_STEP_SUMMARY
+          #cat ./ansible.log | tail -n 10 >> $
+          cat ./ansible.log | grep -B 1 -E 'fatal: \[localhost\]|\[[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}\]: FAILED! =>' >> $GITHUB_STEP_SUMMARY
+          #cat "$ansible_path" >> $GITHUB_STEP_SUMMARY
           #grep -n 'TASK' ./ansible.log | tail -n 1 | cut -d ':' -f 1 | xargs -I {} sed -n '{},$p' ./ansible.log >> $GITHUB_STEP_SUMMARY
           #sudo sed -i '/ERROR\|FAILED/,$p' ./ansible.log >> $GITHUB_STEP_SUMMARY
           #awk 'tolower($0) ~ /error|failed/,0' ./ansible.log >> $GITHUB_STEP_SUMMARY
